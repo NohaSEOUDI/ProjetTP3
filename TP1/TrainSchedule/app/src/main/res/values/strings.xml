@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TrainSchedule</string>
+    <string name="vDep">Ville Départ</string>
+    <string name="vArriv">Ville d\'arrivée</string>
+    <string name="btt_valider">Valider</string>
+    <string name="villeDep">Montpellier</string>
+    <string name="villeArriv">Paris</string>
+
+    <string-array name="horaires">
+        <item>Montpellier\t Paris\t 9:05</item>
+        <item>Montpellier\t Paris\t 11:15</item>
+        <item>Montpellier\t Paris\t 14:30</item>
+    </string-array>
+</resources>

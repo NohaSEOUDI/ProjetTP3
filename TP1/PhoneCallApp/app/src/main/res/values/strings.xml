@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Contacts App</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="age">Age</string>
+    <string name="dom">Domain</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="btt_valider">Submit</string>
+    <string name="btt_confirmSubmition">Call</string>
+    <string name="btt_cancel">Cancel</string>
+    <string name="btt_changeTheme">Change the theme</string>
+    <string name="validationCompleted">Validation Completed</string>
+    <string name="recap">Summary of the data entered</string>
+    <string name="btt_ok">Ok</string>
+</resources>

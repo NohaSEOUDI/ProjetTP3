@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Appli pour contacter</string>
+    <string name="last_name">Nom</string>
+    <string name="first_name">Prénom</string>
+    <string name="age">Age</string>
+    <string name="dom">Domaine de compétences</string>
+    <string name="phone_number">Numéro de téléphone</string>
+    <string name="btt_valider">Valider</string>
+
+    <string name="btt_confirmSubmition">Appeller</string>
+    <string name="btt_cancel">Annuler</string>
+    <string name="btt_changeTheme">Changer le théme</string>
+    <string name="validationCompleted">Validation terminé</string>
+    <string name="recap">Voici la récapulatif du données saisie</string>
+    <string name="btt_ok">Ok</string>
+
+</resources>
