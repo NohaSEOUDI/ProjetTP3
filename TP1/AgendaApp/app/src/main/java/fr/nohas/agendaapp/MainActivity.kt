@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var calendarView: CalendarView
-    private lateinit var textVselectedDay: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,13 +17,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         calendarView = findViewById(R.id.cv)
-        textVselectedDay = findViewById(R.id.selectedDay)
+        calendarView.setOnDateChangeListener(CalendarView.OnDateChangeListener{_,i,il,i2 ->
+            val date = "$i/$il/$i2"
+            val intent = Intent(this,MainActivity2::class.java)
+            intent.putExtra("date",date)
+            startActivity(intent)
+        })
 
-
-
-        calendarView.setOnDateChangeListener{
-            calendarView,i,i2,i3 ->  Toast.makeText(this,"Selected Date:$i3/$i2/$i",Toast.LENGTH_LONG).show()
-        }
     }
 
 

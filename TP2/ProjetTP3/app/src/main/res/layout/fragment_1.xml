@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment1">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_nom"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/nom"
+            android:layout_column="0"
+            />
+
+        <EditText
+            android:id="@+id/et_nom"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_column="1"
+            android:layout_weight="1"
+            />
+    </TableRow>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_prenom"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_nom"
+        android:layout_alignParentBottom="true"
+        android:text="@string/prenom"
+        android:textStyle="bold"
+        android:layout_column="0"
+        />
+
+    <EditText
+        android:id="@+id/et_prenom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_alignParentEnd="true"
+        android:layout_column="1"
+        android:layout_weight="1"
+       />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_dnaissance"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/dateNaissance"
+        android:textStyle="bold"
+        android:layout_column="0"
+       />
+
+
+    <EditText
+        android:id="@+id/et_dnaissance"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:layout_column="1"
+        android:layout_weight="1"
+        />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_numTel"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="@string/numDeTel"
+        android:layout_column="0"
+      />
+
+    <EditText
+        android:id="@+id/et_numTel"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_column="1"
+        android:layout_weight="1"
+         />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_mail"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mail"
+        android:textStyle="bold"
+        />
+
+    <EditText
+        android:id="@+id/et_mail"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:inputType="textWebEmailAddress"
+        android:layout_column="1"
+        android:layout_weight="1"
+        />
+    </TableRow>
+
+
+    <TextView
+        android:id="@+id/tv_centreEntert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/centreEnteret"
+        android:layout_marginTop="49dp"
+        android:textStyle="bold"
+        />
+
+    <CheckBox
+        android:id="@+id/cb_voyage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/voyage"
+        android:textStyle="bold"
+        />
+
+    <CheckBox
+        android:id="@+id/cb_lecture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/lecture"
+        android:textStyle="bold"
+        />
+
+    <CheckBox
+        android:id="@+id/cb_sport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sport"
+        android:textStyle="bold"
+         />
+
+    <CheckBox
+        android:id="@+id/cb_musique"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/musique"
+        android:textStyle="bold"
+       />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/synchro" />
+
+    <Button
+        android:id="@+id/btt_soumettre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/soumettre"
+        android:textStyle="bold"
+         />
+
+    <Button
+        android:id="@+id/btt_telecharger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/telecharger"
+        android:textStyle="bold" />
+</TableLayout>

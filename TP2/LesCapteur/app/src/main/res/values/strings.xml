@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LesCapteur</string>
+    <string name="direction">Direction de votre téléphone</string>
+    <string name="secouer">Secouer pour allumer le Flash et Secouer pour l\'éteindre</string>
+    <string name="proximity">Approcher votre appareil d\'un objet ou sinon éloigné le</string>
+    <string name="endroit">Votre position actuelle se trouve à :</string>
+</resources>

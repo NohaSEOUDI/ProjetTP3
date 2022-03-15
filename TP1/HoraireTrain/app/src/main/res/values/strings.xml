@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">TrainSchedule</string>
+    <string name="vDep">Ville Départ</string>
+    <string name="vArriv">Ville d\'arrivée</string>
+    <string name="btt_valider">Valider</string>
+    <string name="villeDep">Montpellier</string>
+    <string name="villeArriv">Paris</string>
+
+    <string-array name="horaires1">
+        <item>Montpellier\t Paris\t 7:05</item>
+        <item>Montpellier\t Paris\t 8:15</item>
+        <item>Montpellier\t Paris\t 10:30</item>
+        <item>Montpellier\t Paris\t 11:30</item>
+        <item>Montpellier\t Paris\t 12:30</item>
+        <item>Montpellier\t Paris\t 13:45</item>
+        <item>Montpellier\t Paris\t 14:30</item>
+        <item>Montpellier\t Paris\t 15:250</item>
+        <item>Montpellier\t Paris\t 16:35</item>
+        <item>Montpellier\t Paris\t 17:30</item>
+        <item>Montpellier\t Paris\t 18:30</item>
+        <item>Montpellier\t Paris\t 19:30</item>
+        <item>Montpellier\t Paris\t 20:00</item>
+        <item>Montpellier\t Paris\t 21:10</item>
+    </string-array>
+
+    <string-array name="horaires2">
+        <item>Marseille\t Avignon\t 8:10</item>
+        <item>Marseille\t Avignon\t 12:15</item>
+        <item>Marseille\t Avignon\t 15:30</item>
+    </string-array>
+
+    <string-array name="horaires3">
+        <item>Montpellier\t Lyon\t 7:11</item>
+        <item>Montpellier\t Lyon\t 11:45</item>
+        <item>Montpellier\t Lyon\t 16:35</item>
+    </string-array>
+
+</resources>

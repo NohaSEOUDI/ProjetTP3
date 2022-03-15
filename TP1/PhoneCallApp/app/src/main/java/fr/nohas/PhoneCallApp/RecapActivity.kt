@@ -19,6 +19,7 @@ class RecapActivity : AppCompatActivity(){
     private lateinit var  btSubmit : Button
     private lateinit var  btTheme : Button
 
+    //fichier pour afficher la récaputilatif des données insérée
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
