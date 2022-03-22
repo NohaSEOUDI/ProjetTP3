@@ -1,22 +1,29 @@
 package fr.nohas.projettp3;
 
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -55,7 +62,7 @@ public class Fragment1 extends Fragment {
     private Fragment fragment2;
 
     private String strNom,strPrenom,strMail,strNumTel,strDateN;
-
+    public static final String link="https://whispyy.github.io/TP-Services/[PDF]TP-Services.pdf";
 
     //cette fonction ce charge pour injecter les ressources de layout(XML) au fragment1.java
     @Override
@@ -79,21 +86,28 @@ public class Fragment1 extends Fragment {
         Button button_soumettre = (Button) rootView.findViewById(R.id.btt_soumettre);
         Button button_telechargement = (Button) rootView.findViewById(R.id.btt_telecharger);
 
-       /* switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                if(checked)
+                if(checked) {
                     //do anything
-                else
+                    switchButton.setText("Données synchronisée");
+                }else {
                     ///do another thing
+                    switchButton.setText("Données non synchronisées");
+
+                }
             }
-        });*/
+        });
+
         button_telechargement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //String st = "https://newsapi.org/v2/top-headlines?country=fr&category=health&apiKey=4abe9d26b7f64ca3adcca4d8a0935f22";
+                save();
+              /* String st = "https://www.metaweather.com/api/location/44";
                AsyncHTTP task= new AsyncHTTP(getActivity());
-               task.execute("https://newsapi.org/v2/top-headlines?country=fr&category=health&apiKey=4abe9d26b7f64ca3adcca4d8a0935f22");
+               task.execute(st);//"https://newsapi.org/v2/top-headlines?country=fr&category=health&apiKey=4abe9d26b7f64ca3adcca4d8a0935f22");
+                System.out.println("Affichage"+task.doInBackground(st));*/
             }
         });
 
@@ -130,61 +144,43 @@ public class Fragment1 extends Fragment {
                 fragment2 = new Fragment2();
                 fragment2.setArguments(bundle);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,fragment2).addToBackStack(null).commit(); // pour retourner au fragement précédent :o
-                //ok now get this on second fragment getFragmentManager()
-               // Log.i("Debug",editText_nom.getText()+ " / "+editText_prenom.getText());
+
             }
         });
         if(savedInstanceState != null){
             strNom=savedInstanceState.getString("LNameKey");
             fragment2=getParentFragmentManager().getFragment(savedInstanceState, "mySecondFragment");
-            //strPrenom=
-            //strMail=
-            //strNumTel=strDateN=
-
         }
         return rootView;
-    }
-    private String readStream(InputStream is) throws IOException{
-
-        StringBuilder sb = new StringBuilder();
-        BufferedReader r = new BufferedReader(new InputStreamReader(is));//, 1000
-        for(String line = r.readLine(); line!=null; line=r.readLine()){
-            sb.append(line);
-        }
-        is.close();
-        return sb.toString();
-    }
-
-
-    public InputStream getStream(String st) {
-        try {
-            URL url = new URL(st);
-            URLConnection urlConnection = url.openConnection();
-            urlConnection.setConnectTimeout(1000);
-            Toast.makeText(getActivity(), "Bien", Toast.LENGTH_SHORT).show();
-            return urlConnection.getInputStream();
-        } catch (MalformedURLException e) {
-            Toast.makeText(getActivity(), "1er catch", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        } catch (IOException e) {
-            Toast.makeText(getActivity(), "2em catch", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        return null;
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        //getParentFragmentManager().putFragment(outState, "mySecondFragment", fragment2);
-        //sauvgarde des données du context utilisateur
-       // outState.putString("LNameKey",editText_nom.getText().toString());
-
     }
+
+    public void save(){
+        if ( ContextCompat.checkSelfPermission(getActivity(),android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            //Log.e("Permission error","You have permission");
+            DownloadManager.Request request = new DownloadManager.Request(Uri.parse(link));
+            String title = URLUtil.guessFileName(link, null, null);
+            request.setTitle(title);
+            request.setDescription("En cours de téléchargement...");
+            String cookie = android.webkit.CookieManager.getInstance().getCookie(link);
+            request.addRequestHeader("cookie", cookie);
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title);
+
+            DownloadManager downloadManager = (DownloadManager) getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+            downloadManager.enqueue(request);
+            Toast.makeText(getActivity(), "Téléchargement terminé !", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(getActivity(), "Vous n'avez pas la permission pour télécharger le fichier", Toast.LENGTH_SHORT).show();
+            Log.e("Permission error", "You dont have permission");
+        }
+    }
+
+
 }
 
-/*
-* dans le bundule, les données sont stockées, soit on le récupére apartir du fichier soit à aprtir du bundule
-*
-*
-* */

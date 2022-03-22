@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//ou appeller cette classe ??
 public class MyIntentService extends IntentService {
     public String FILE_Name="example.json";
     public MyIntentService() {

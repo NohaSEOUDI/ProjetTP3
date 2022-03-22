@@ -33,8 +33,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+//Frgment 2 pour  afficher toutes les données siasies
 
-//pour juste afficher toutes les données siasies
 public class Fragment2 extends Fragment {
     //pour l'exo2 on déclare 2 fichier jon et txt
     private static final String FILE_NAME= "example.txt";
@@ -43,7 +43,7 @@ public class Fragment2 extends Fragment {
     String cb1,cb2,cb3,cb4;
 
     //déclare tous nos éléments
-    TextView textViewNom,textViewPrenom,textViewDateN,textViewNumTel,textViewMail,textSwitchB;
+    TextView textViewNom,textViewPrenom,textViewDateN,textViewNumTel,textViewMail,textSwitchB;  // mes textView
     ListView listeV;
     List<String> listeS= new ArrayList<>(); //liste pour le listeView sert à l'affichage des items
     Button buttonValidation,readButton;
@@ -74,6 +74,7 @@ public class Fragment2 extends Fragment {
         s5=bundle.getString("MailKey");
         s6=bundle.getString("SwitchB");
 
+        //on initialise nos éléments
         textViewNom.setText(s1);
         textViewPrenom.setText(s2);
         textViewDateN.setText(s3);
@@ -81,6 +82,7 @@ public class Fragment2 extends Fragment {
         textViewMail.setText(s5);
         textSwitchB.setText(s6);
 
+        // on récupére les valeurs du check box à partir du bundle
         cb1=bundle.getString("Musique");
         cb2=bundle.getString("Voyage");
         cb3=bundle.getString("Lecture");
@@ -88,6 +90,7 @@ public class Fragment2 extends Fragment {
 
         //on ajoute les checkbox dans la liste
         listeCheck_box.add(cb1);listeCheck_box.add(cb2);listeCheck_box.add(cb3);listeCheck_box.add(cb4);
+
 
         if(cb1!=null){
             listeS.add(bundle.getString("Musique"));
@@ -107,29 +110,9 @@ public class Fragment2 extends Fragment {
         buttonValidation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FileOutputStream fos1,fos2;
-
-                try {
-                    fos1 = getActivity().openFileOutput(FILE_NAME, MODE_PRIVATE);
-                    fos1.write(("Nom: " + s1 + "\n").getBytes());
-                    fos1.write(("Prénom: " + s2 + "\n").getBytes());
-                    fos1.write(("Date de Naissance: " + s3 + "\n").getBytes());
-                    fos1.write(("Numéro de Tél: " + s4 + "\n").getBytes());
-                    fos1.write(("Adresse mail: " + s5 + "\n").getBytes());
-                    fos1.write(("Centre d'intérêt: \n").getBytes());
-                    for (String s : listeCheck_box) {
-                        fos1.write((s + "\n").getBytes());
-                    }
-                    fos1.write(("SwitchButton: " + s6 + "\n").getBytes());
-                    fos1.close();
-
-                    writeJsonFile();
-                    Toast.makeText(getActivity(), "Vous avez bien enregister 2 fichier, Json et txt", Toast.LENGTH_SHORT).show();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                writeTextFile();
+                writeJsonFile();
+                Toast.makeText(getActivity(), "Vous avez bien enregister 2 fichier, Json et txt", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -153,7 +136,34 @@ public class Fragment2 extends Fragment {
         super.onSaveInstanceState(outState);
     }
 
-   private void writeJsonFile(){
+
+
+    //fonction qui stocke les données saisies dans un fichier texte
+    private void writeTextFile(){
+        FileOutputStream fos1;
+        try {
+            fos1 = getActivity().openFileOutput(FILE_NAME, MODE_PRIVATE);
+            fos1.write(("Nom: " + s1 + "\n").getBytes());
+            fos1.write(("Prénom: " + s2 + "\n").getBytes());
+            fos1.write(("Date de Naissance: " + s3 + "\n").getBytes());
+            fos1.write(("Numéro de Tél: " + s4 + "\n").getBytes());
+            fos1.write(("Adresse mail: " + s5 + "\n").getBytes());
+            fos1.write(("Centre d'intérêt: \n").getBytes());
+            for (String s : listeCheck_box) {
+                fos1.write((s + "\n").getBytes());
+            }
+            fos1.write(("SwitchButton: " + s6 + "\n").getBytes());
+            fos1.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //fonction qui stocke les données saisies dans un fichier JSON
+    private void writeJsonFile(){
         JSONObject obj = new JSONObject();
         try {
             obj.put("LNameKey",s1);
@@ -167,25 +177,27 @@ public class Fragment2 extends Fragment {
             e.printStackTrace();
         }
         String userString = obj.toString();
-       File file = new File(getActivity().getFilesDir(), FILE_NAME);
-       FileWriter fileWriter = null;
-       try {
-           fileWriter = new FileWriter(file);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-       try {
-           bufferedWriter.write(userString);
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
-       try {
-           bufferedWriter.close();
-       } catch (IOException e) {
-           e.printStackTrace();
-       }
+        File file = new File(getActivity().getFilesDir(), FILE_NAME);
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        try {
+            bufferedWriter.write(userString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            bufferedWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     private void readFile(){
         try {

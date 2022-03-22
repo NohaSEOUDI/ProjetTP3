@@ -8,6 +8,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,30 +28,60 @@ public class AsyncHTTP extends AsyncTask<String, Integer, String> {
     AsyncHTTP(Context c){
         this.activity=c;
     }
+
+
     @Override
     protected String doInBackground(String... strings) {
-        URL url = null;
-        HttpURLConnection urlConnection = null;
-        String result = null;
+        StringBuilder response = new StringBuilder();
+
+        //Prepare the URL and the connection
+        URL u = null;
         try {
-            url = new URL(strings[0]);
-            urlConnection = (HttpURLConnection) url.openConnection(); // Open ;;;??PBBBB
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream()); // Stream
-            System.out.println("Affichage PB Bien");
-            result = readStream(in); // Read stream
-        }
-        catch (MalformedURLException e) {
-             System.out.println("Affichage 1er Catch");
-             e.printStackTrace(); }
-        catch (IOException e) {
-            System.out.println("Affichage 2eme catch");
+            u = new URL(strings[0]);
+            System.out.println("Affichage pas de pb");
+        } catch (MalformedURLException e) {
+            System.out.println("Affichage: pb mal formed url");
             e.printStackTrace();
         }
-        finally {
-             System.out.println("Affichage Finally Catch");
-             if (urlConnection != null)
-                 urlConnection.disconnect();
-        }return result; // returns the result
+
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) u.openConnection();
+            System.out.println("Affichage: Ok");
+        } catch (IOException e) {
+            System.out.println("Affichage: PB io1");
+            e.printStackTrace();
+        }
+
+        try {
+            if (conn.getResponseCode() == HttpURLConnection.HTTP_OK)
+            {
+                //Get the Stream reader ready
+                BufferedReader input = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+                //Loop through the return data and copy it over to the response object to be processed
+                String line = null;
+
+                while ((line = input.readLine()) != null)
+                {
+                    response.append(line);
+                }
+
+                input.close();
+            }
+            System.out.println("Affichage Biennnn");
+        } catch (IOException e) {
+            System.out.println("Affichage PB io2");
+            e.printStackTrace();
+        }
+        System.out.println("Affichage response !!!!!\n"+response);
+        try {
+            JSONObject obj = new JSONObject(response.toString());
+            System.out.println("Affichage response ? \n"+response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return response.toString();
     }
 
 
@@ -61,5 +94,4 @@ public class AsyncHTTP extends AsyncTask<String, Integer, String> {
         is.close();
         return sb.toString();
     }
-
 }
