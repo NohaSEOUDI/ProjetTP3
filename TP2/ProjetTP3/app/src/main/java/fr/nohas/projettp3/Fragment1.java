@@ -114,7 +114,8 @@ public class Fragment1 extends Fragment {
         button_soumettre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //on doit passer à la 2eme fragement
+                //on doit passer à la 2eme fragement on passe les données à la 2ème fragment 
+                // sous forme de dictionnaire 
                 Bundle bundle = new Bundle();
 
                 bundle.putString("LNameKey",editText_nom.getText().toString());
@@ -147,6 +148,7 @@ public class Fragment1 extends Fragment {
 
             }
         });
+        // pour saver l'état du fragement lors de la rotation du fragment 
         if(savedInstanceState != null){
             strNom=savedInstanceState.getString("LNameKey");
             fragment2=getParentFragmentManager().getFragment(savedInstanceState, "mySecondFragment");

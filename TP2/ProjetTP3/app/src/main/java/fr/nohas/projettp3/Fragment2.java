@@ -176,7 +176,9 @@ public class Fragment2 extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String userString = obj.toString();
+
+        //cette partie a pour but de copier l'objet sous forme json dans une fichier
+        String userString = obj.toString(); // returns the JSON in string format 
         File file = new File(getActivity().getFilesDir(), FILE_NAME);
         FileWriter fileWriter = null;
         try {
